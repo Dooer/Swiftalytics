@@ -51,7 +51,8 @@ public func setTrackingName<T: UIViewController>(for viewController: T.Type, tra
 }
 
 public func setTrackingName<T: UIViewController>(for viewController: T.Type, nameFunction: @escaping ((T) -> String)) {
-    setTrackingName(for: { vc in { nameFunction(vc) } }) // Curry
+    let curry = { vc in { nameFunction(vc) } }
+    setTrackingName(for: curry)
 }
 
 public func setTrackingName<T: UIViewController>(for curriedNameFunction: @escaping (T) -> () -> String) {
